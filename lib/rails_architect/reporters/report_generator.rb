@@ -1,8 +1,11 @@
-require 'json'
-require 'colorize'
+# frozen_string_literal: true
+
+require "json"
+require "colorize"
 
 module RailsArchitect
   module Reporters
+    # Generates and formats analysis reports with colorized output
     class ReportGenerator
       attr_reader :results
 
@@ -20,16 +23,16 @@ module RailsArchitect
         print_recommendations
       end
 
-      def to_json
+      def to_json(*_args)
         @results.to_json
       end
 
       private
 
       def print_header
-        puts "\n" + "=" * 80
+        puts "\n#{'=' * 80}"
         puts "🏗️  RAILS ARCHITECT - PROJECT ANALYSIS REPORT".colorize(:blue).bold
-        puts "=" * 80 + "\n"
+        puts "#{'=' * 80}\n"
       end
 
       def print_architecture_report
@@ -37,7 +40,7 @@ module RailsArchitect
         puts "📐 ARCHITECTURE ANALYSIS".colorize(:cyan).bold
         puts "-" * 80
         puts "Overall Score: #{arch[:score]}%".colorize(:yellow)
-        
+
         puts "\n✓ Existing Directories (#{arch[:structure].count { |d| d[:exists] }}/#{arch[:structure].count}):"
         arch[:structure].each do |dir|
           status = dir[:exists] ? "✅" : "❌"
@@ -109,8 +112,12 @@ module RailsArchitect
         puts "\nBDD Practices:"
         practices = bdd[:practices]
         puts "  • User Stories: #{practices[:user_stories] ? '✅ Found' : '❌ Not found'}"
-        puts "  • Readable Scenarios: #{practices[:readable_scenarios][:present] ? "✅ #{practices[:readable_scenarios][:count]} found" : '❌ Not found'}"
-        puts "  • Integration Tests: #{practices[:integration_tests][:request_specs] + practices[:integration_tests][:integration_test_files]} files"
+        scenarios = practices[:readable_scenarios]
+        readable = scenarios[:present] ? "✅ #{scenarios[:count]} found" : "❌ Not found"
+        puts "  • Readable Scenarios: #{readable}"
+        request_specs = practices[:integration_tests][:request_specs]
+        integration_files = practices[:integration_tests][:integration_test_files]
+        puts "  • Integration Tests: #{request_specs + integration_files} files"
 
         if bdd[:suggestions].any?
           puts "\n💡 Suggestions:"
@@ -132,29 +139,27 @@ module RailsArchitect
 
         srp = solid[:single_responsibility]
         puts "\n1. Single Responsibility Principle (SRP)"
-        puts "   Status: #{srp[:status]}".colorize(srp[:status].include?('✅') ? :light_green : :yellow)
-        unless srp[:issues].empty?
-          puts "   Issues found in: #{srp[:issues].join(', ')}"
-        end
+        puts "   Status: #{srp[:status]}".colorize(srp[:status].include?("✅") ? :light_green : :yellow)
+        puts "   Issues found in: #{srp[:issues].join(', ')}" unless srp[:issues].empty?
 
         ocp = solid[:open_closed]
         puts "\n2. Open/Closed Principle (OCP)"
-        puts "   Status: #{ocp[:status]}".colorize(ocp[:status].include?('✅') ? :light_green : :yellow)
+        puts "   Status: #{ocp[:status]}".colorize(ocp[:status].include?("✅") ? :light_green : :yellow)
         puts "   - Concerns: #{ocp[:has_concerns] ? '✅ Yes' : '❌ No'}"
         puts "   - Inheritance: #{ocp[:has_inheritance] ? '✅ Used' : '❌ Not used'}"
 
         lsp = solid[:liskov_substitution]
         puts "\n3. Liskov Substitution Principle (LSP)"
-        puts "   Status: #{lsp[:status]}".colorize(lsp[:status].include?('✅') ? :light_green : :yellow)
+        puts "   Status: #{lsp[:status]}".colorize(lsp[:status].include?("✅") ? :light_green : :yellow)
         puts "   - Inheritance depth: #{lsp[:inheritance_chains]}"
 
         isp = solid[:interface_segregation]
         puts "\n4. Interface Segregation Principle (ISP)"
-        puts "   Status: #{isp[:status]}".colorize(isp[:status].include?('✅') ? :light_green : :yellow)
+        puts "   Status: #{isp[:status]}".colorize(isp[:status].include?("✅") ? :light_green : :yellow)
 
         dip = solid[:dependency_inversion]
         puts "\n5. Dependency Inversion Principle (DIP)"
-        puts "   Status: #{dip[:status]}".colorize(dip[:status].include?('✅') ? :light_green : :yellow)
+        puts "   Status: #{dip[:status]}".colorize(dip[:status].include?("✅") ? :light_green : :yellow)
 
         if solid[:suggestions].any?
           puts "\n💡 Suggestions:"
@@ -169,16 +174,21 @@ module RailsArchitect
         puts "📊 OVERALL SUMMARY".colorize(:blue).bold
         puts "=" * 80
         puts "\nArchitecture:  #{@results[:architecture][:score]}%".colorize(:light_yellow)
-        puts "TDD Coverage:  #{@results[:tdd][:score][:score].round(2)}% #{@results[:tdd][:score][:rating]}".colorize(@results[:tdd][:score][:color])
-        puts "BDD Practices: #{@results[:bdd][:score][:rating]}".colorize(@results[:bdd][:score][:color])
-        puts "SOLID Score:   #{@results[:solid][:score][:score]}/100 #{@results[:solid][:score][:rating]}".colorize(@results[:solid][:score][:color])
+        tdd_score = @results[:tdd][:score]
+        tdd_str = "TDD Coverage:  #{tdd_score[:score].round(2)}% #{tdd_score[:rating]}"
+        puts tdd_str.colorize(tdd_score[:color])
+        bdd_score = @results[:bdd][:score]
+        puts "BDD Practices: #{bdd_score[:rating]}".colorize(bdd_score[:color])
+        solid_score = @results[:solid][:score]
+        solid_str = "SOLID Score:   #{solid_score[:score]}/100 #{solid_score[:rating]}"
+        puts solid_str.colorize(solid_score[:color])
         puts "\n"
       end
 
       def print_recommendations
         puts "=" * 80
         puts "🚀 RECOMMENDATIONS FOR IMPROVEMENT".colorize(:green).bold
-        puts "=" * 80 + "\n"
+        puts "#{'=' * 80}\n"
 
         all_suggestions = (
           @results[:architecture][:suggestions] +
@@ -195,7 +205,7 @@ module RailsArchitect
           puts "✅ Excellent! Your project follows best practices.".colorize(:light_green)
         end
 
-        puts "\n" + "=" * 80 + "\n"
+        puts "\n#{'=' * 80}\n"
       end
     end
   end

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module RailsArchitect
   module Analyzers
+    # Analyzes test-driven development coverage and practices
     class TddAnalyzer
       attr_reader :project_path
 
@@ -21,15 +24,17 @@ module RailsArchitect
       private
 
       def count_test_files
-        test_path = File.join(project_path, 'test')
+        test_path = File.join(project_path, "test")
         return 0 unless File.directory?(test_path)
-        Dir.glob(File.join(test_path, '**/*_test.rb')).count
+
+        Dir.glob(File.join(test_path, "**/*_test.rb")).count
       end
 
       def count_spec_files
-        spec_path = File.join(project_path, 'spec')
+        spec_path = File.join(project_path, "spec")
         return 0 unless File.directory?(spec_path)
-        Dir.glob(File.join(spec_path, '**/*_spec.rb')).count
+
+        Dir.glob(File.join(spec_path, "**/*_spec.rb")).count
       end
 
       def estimate_coverage
@@ -44,9 +49,10 @@ module RailsArchitect
       end
 
       def count_code_files
-        app_path = File.join(project_path, 'app')
+        app_path = File.join(project_path, "app")
         return 0 unless File.directory?(app_path)
-        Dir.glob(File.join(app_path, '**/*.rb')).count
+
+        Dir.glob(File.join(app_path, "**/*.rb")).count
       end
 
       def calculate_coverage_score
@@ -65,20 +71,20 @@ module RailsArchitect
 
       def analyze_test_structure
         {
-          models: analyze_test_type('models'),
-          controllers: analyze_test_type('controllers'),
-          services: analyze_test_type('services'),
-          helpers: analyze_test_type('helpers'),
-          requests: analyze_test_type('requests')
+          models: analyze_test_type("models"),
+          controllers: analyze_test_type("controllers"),
+          services: analyze_test_type("services"),
+          helpers: analyze_test_type("helpers"),
+          requests: analyze_test_type("requests")
         }
       end
 
       def analyze_test_type(type)
-        spec_path = File.join(project_path, 'spec', type)
-        test_path = File.join(project_path, 'test', type)
+        spec_path = File.join(project_path, "spec", type)
+        test_path = File.join(project_path, "test", type)
 
-        spec_count = File.directory?(spec_path) ? Dir.glob(File.join(spec_path, '**/*.rb')).count : 0
-        test_count = File.directory?(test_path) ? Dir.glob(File.join(test_path, '**/*.rb')).count : 0
+        spec_count = File.directory?(spec_path) ? Dir.glob(File.join(spec_path, "**/*.rb")).count : 0
+        test_count = File.directory?(test_path) ? Dir.glob(File.join(test_path, "**/*.rb")).count : 0
 
         {
           spec: spec_count,
@@ -95,7 +101,7 @@ module RailsArchitect
         end
 
         coverage = estimate_coverage
-        if coverage < 50 && coverage > 0
+        if coverage < 50 && coverage.positive?
           suggestions << "⚠️  Test coverage is low (#{coverage.round(2)}%). Aim for at least 80%"
         end
 
@@ -107,7 +113,7 @@ module RailsArchitect
           suggestions << "Add controller specs/tests for request/response handling"
         end
 
-        if analyze_test_structure[:services][:total].zero? && has_services?
+        if analyze_test_structure[:services][:total].zero? && services?
           suggestions << "Create tests for service objects"
         end
 
@@ -116,14 +122,14 @@ module RailsArchitect
         suggestions
       end
 
-      def has_services?
-        services_path = File.join(project_path, 'app/services')
-        File.directory?(services_path) && !Dir.glob(File.join(services_path, '*.rb')).empty?
+      def services?
+        services_path = File.join(project_path, "app/services")
+        File.directory?(services_path) && !Dir.glob(File.join(services_path, "*.rb")).empty?
       end
 
       def using_minitest_only?
         spec_files = count_spec_files
-        has_gemfile = File.exist?(File.join(project_path, 'Gemfile'))
+        has_gemfile = File.exist?(File.join(project_path, "Gemfile"))
 
         spec_files.zero? && has_gemfile
       end

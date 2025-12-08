@@ -1,7 +1,10 @@
-require 'fileutils'
+# frozen_string_literal: true
+
+require "fileutils"
 
 module RailsArchitect
   module Analyzers
+    # Analyzes Rails project architecture, structure, and design patterns
     class ArchitectureAnalyzer
       STANDARD_DIRS = %w[
         app/models
@@ -62,13 +65,13 @@ module RailsArchitect
 
       def check_optional_dirs
         optional = {
-          'app/services' => 'Service Objects',
-          'app/decorators' => 'Decorator Pattern',
-          'app/policies' => 'Authorization Policies',
-          'app/validators' => 'Custom Validators',
-          'app/presenters' => 'Presenter Pattern',
-          'app/interactors' => 'Interactors/Use Cases',
-          'app/concerns' => 'Shared Concerns'
+          "app/services" => "Service Objects",
+          "app/decorators" => "Decorator Pattern",
+          "app/policies" => "Authorization Policies",
+          "app/validators" => "Custom Validators",
+          "app/presenters" => "Presenter Pattern",
+          "app/interactors" => "Interactors/Use Cases",
+          "app/concerns" => "Shared Concerns"
         }
 
         optional.map do |dir, description|
@@ -84,25 +87,21 @@ module RailsArchitect
       def generate_suggestions
         suggestions = []
 
-        if missing_directories.include?('app/services')
+        if missing_directories.include?("app/services")
           suggestions << "Consider creating 'app/services' directory for business logic"
         end
 
-        if missing_directories.include?('app/decorators')
+        if missing_directories.include?("app/decorators")
           suggestions << "Create 'app/decorators' for separating presentation logic from models"
         end
 
-        if missing_directories.include?('app/policies')
+        if missing_directories.include?("app/policies")
           suggestions << "Implement 'app/policies' directory for authorization logic (using Pundit)"
         end
 
-        if has_fat_models?
-          suggestions << "⚠️  Detected fat models. Consider extracting logic to services or concerns"
-        end
+        suggestions << "⚠️  Detected fat models. Consider extracting logic to services or concerns" if fat_models?
 
-        if has_fat_controllers?
-          suggestions << "⚠️  Detected fat controllers. Move business logic to services"
-        end
+        suggestions << "⚠️  Detected fat controllers. Move business logic to services" if fat_controllers?
 
         if poorly_organized_helpers?
           suggestions << "Refactor helpers - consider moving logic to presenters or decorators"
@@ -111,29 +110,29 @@ module RailsArchitect
         suggestions
       end
 
-      def has_fat_models?
-        models_path = File.join(project_path, 'app/models')
+      def fat_models?
+        models_path = File.join(project_path, "app/models")
         return false unless File.directory?(models_path)
 
-        Dir.glob(File.join(models_path, '*.rb')).any? do |file|
+        Dir.glob(File.join(models_path, "*.rb")).any? do |file|
           File.readlines(file).count > 200
         end
       end
 
-      def has_fat_controllers?
-        controllers_path = File.join(project_path, 'app/controllers')
+      def fat_controllers?
+        controllers_path = File.join(project_path, "app/controllers")
         return false unless File.directory?(controllers_path)
 
-        Dir.glob(File.join(controllers_path, '**/*.rb')).any? do |file|
+        Dir.glob(File.join(controllers_path, "**/*.rb")).any? do |file|
           File.readlines(file).count > 150
         end
       end
 
       def poorly_organized_helpers?
-        helpers_path = File.join(project_path, 'app/helpers')
+        helpers_path = File.join(project_path, "app/helpers")
         return false unless File.directory?(helpers_path)
 
-        helper_files = Dir.glob(File.join(helpers_path, '*.rb'))
+        helper_files = Dir.glob(File.join(helpers_path, "*.rb"))
         helper_files.any? do |file|
           File.readlines(file).count > 100
         end
@@ -141,7 +140,8 @@ module RailsArchitect
 
       def count_files(path)
         return 0 unless File.directory?(path)
-        Dir.glob(File.join(path, '**/*.rb')).count
+
+        Dir.glob(File.join(path, "**/*.rb")).count
       end
     end
   end

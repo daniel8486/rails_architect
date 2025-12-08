@@ -1,15 +1,18 @@
-require 'thor'
-require 'colorize'
+# frozen_string_literal: true
+
+require "thor"
+require "colorize"
 
 module RailsArchitect
+  # Command-line interface for Rails Architect analysis tool
   class CLI < Thor
-    desc 'analyze [PROJECT_PATH]', 'Analyze a Rails project for architecture, TDD, BDD, and SOLID principles'
-    option :json, type: :boolean, desc: 'Output results as JSON'
-    option :output, type: :string, desc: 'Save report to a file'
+    desc "analyze [PROJECT_PATH]", "Analyze a Rails project for architecture, TDD, BDD, and SOLID principles"
+    option :json, type: :boolean, desc: "Output results as JSON"
+    option :output, type: :string, desc: "Save report to a file"
 
     def analyze(project_path = nil)
       project_path ||= Dir.pwd
-      
+
       unless File.directory?(project_path)
         puts "❌ Project path does not exist: #{project_path}".colorize(:red)
         exit 1
@@ -26,7 +29,7 @@ module RailsArchitect
           puts output
         end
       elsif options[:output]
-        File.open(options[:output], 'w') do |f|
+        File.open(options[:output], "w") do |f|
           # Redirect output to file
           original_stdout = $stdout
           $stdout = f
@@ -39,7 +42,7 @@ module RailsArchitect
       end
     end
 
-    desc 'suggest [PROJECT_PATH]', 'Get architecture suggestions for your Rails project'
+    desc "suggest [PROJECT_PATH]", "Get architecture suggestions for your Rails project"
     def suggest(project_path = nil)
       project_path ||= Dir.pwd
 
@@ -50,9 +53,9 @@ module RailsArchitect
 
       results = RailsArchitect::Core.new(project_path).analyze
 
-      puts "\n" + "=" * 80
+      puts "\n#{'=' * 80}"
       puts "🎯 ARCHITECTURE SUGGESTIONS".colorize(:blue).bold
-      puts "=" * 80 + "\n"
+      puts "#{'=' * 80}\n"
 
       suggestions = (
         results[:architecture][:suggestions] +
@@ -69,10 +72,10 @@ module RailsArchitect
         puts "✅ Your project is well-structured!".colorize(:light_green)
       end
 
-      puts "\n" + "=" * 80 + "\n"
+      puts "\n#{'=' * 80}\n"
     end
 
-    desc 'version', 'Show the version of rails_architect'
+    desc "version", "Show the version of rails_architect"
     def version
       puts "Rails Architect #{RailsArchitect::VERSION}"
     end

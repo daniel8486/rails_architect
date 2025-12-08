@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module RailsArchitect
   module Analyzers
+    # Evaluates SOLID principles adherence in Rails projects
     class SolidAnalyzer
       attr_reader :project_path
 
@@ -32,10 +35,10 @@ module RailsArchitect
       def analyze_open_closed
         {
           description: "Classes should be open for extension, closed for modification",
-          has_concerns: has_concerns?,
-          has_modules: has_modules?,
-          has_inheritance: has_inheritance?,
-          status: has_concerns? || has_inheritance? ? "✅ Some patterns found" : "⚠️  Consider using concerns or inheritance"
+          has_concerns: concerns?,
+          has_modules: modules?,
+          has_inheritance: inheritance?,
+          status: concerns? || inheritance? ? "✅ Some patterns found" : "⚠️  Consider using concerns or inheritance"
         }
       end
 
@@ -61,18 +64,18 @@ module RailsArchitect
       def analyze_dependency_inversion
         {
           description: "Depend on abstractions, not concretions",
-          service_layer: has_services?,
+          service_layer: services?,
           dependency_injection: detect_dependency_injection,
-          status: has_services? ? "✅ Service layer detected" : "⚠️  Consider implementing service layer"
+          status: services? ? "✅ Service layer detected" : "⚠️  Consider implementing service layer"
         }
       end
 
       def calculate_solid_score
         srp = detect_srp_violations.empty? ? 20 : 10
-        ocp = (has_concerns? || has_inheritance?) ? 20 : 10
+        ocp = concerns? || inheritance? ? 20 : 10
         lsp = analyze_inheritance_chains < 3 ? 20 : 10
         isp = (detect_fat_modules + detect_large_classes).empty? ? 20 : 10
-        dip = has_services? ? 20 : 10
+        dip = services? ? 20 : 10
 
         total = srp + ocp + lsp + isp + dip
         { score: total, rating: rating_from_score(total), color: color_from_score(total) }
@@ -106,46 +109,46 @@ module RailsArchitect
 
       def detect_srp_violations
         violations = []
-        models_path = File.join(project_path, 'app/models')
+        models_path = File.join(project_path, "app/models")
         return violations unless File.directory?(models_path)
 
-        Dir.glob(File.join(models_path, '*.rb')).each do |file|
+        Dir.glob(File.join(models_path, "*.rb")).each do |file|
           content = File.read(file)
           # Simple heuristic: check for many associations and methods
           associations = content.scan(/has_many|belongs_to|has_one/).count
-          methods = content.scan(/def /).count
+          methods = content.scan("def ").count
 
-          if associations > 5 && methods > 10
-            violations << File.basename(file, '.rb')
-          end
+          violations << File.basename(file, ".rb") if associations > 5 && methods > 10
         end
 
         violations
       end
 
-      def has_concerns?
-        concerns_path = File.join(project_path, 'app/concerns')
-        File.directory?(concerns_path) && !Dir.glob(File.join(concerns_path, '*.rb')).empty?
+      def concerns?
+        concerns_path = File.join(project_path, "app/concerns")
+        File.directory?(concerns_path) && !Dir.glob(File.join(concerns_path, "*.rb")).empty?
       end
 
-      def has_modules?
-        lib_path = File.join(project_path, 'lib')
+      def modules?
+        lib_path = File.join(project_path, "lib")
         return false unless File.directory?(lib_path)
-        Dir.glob(File.join(lib_path, '**/*.rb')).any? { |f| File.read(f).include?('module ') }
+
+        Dir.glob(File.join(lib_path, "**/*.rb")).any? { |f| File.read(f).include?("module ") }
       end
 
-      def has_inheritance?
-        app_path = File.join(project_path, 'app')
+      def inheritance?
+        app_path = File.join(project_path, "app")
         return false unless File.directory?(app_path)
-        Dir.glob(File.join(app_path, '**/*.rb')).any? { |f| File.read(f).match?(/class \w+ </) }
+
+        Dir.glob(File.join(app_path, "**/*.rb")).any? { |f| File.read(f).match?(/class \w+ </) }
       end
 
       def analyze_inheritance_chains
-        app_path = File.join(project_path, 'app')
+        app_path = File.join(project_path, "app")
         return 0 unless File.directory?(app_path)
 
         max_depth = 0
-        Dir.glob(File.join(app_path, '**/*.rb')).each do |file|
+        Dir.glob(File.join(app_path, "**/*.rb")).each do |file|
           content = File.read(file)
           depth = content.scan(/class \w+ </).count
           max_depth = depth if depth > max_depth
@@ -155,19 +158,20 @@ module RailsArchitect
       end
 
       def count_concerns
-        concerns_path = File.join(project_path, 'app/concerns')
+        concerns_path = File.join(project_path, "app/concerns")
         return 0 unless File.directory?(concerns_path)
-        Dir.glob(File.join(concerns_path, '*.rb')).count
+
+        Dir.glob(File.join(concerns_path, "*.rb")).count
       end
 
       def detect_fat_modules
         modules = []
-        lib_path = File.join(project_path, 'lib')
+        lib_path = File.join(project_path, "lib")
         return modules unless File.directory?(lib_path)
 
-        Dir.glob(File.join(lib_path, '**/*.rb')).each do |file|
+        Dir.glob(File.join(lib_path, "**/*.rb")).each do |file|
           lines = File.readlines(file).count
-          modules << File.basename(file, '.rb') if lines > 300
+          modules << File.basename(file, ".rb") if lines > 300
         end
 
         modules
@@ -175,28 +179,28 @@ module RailsArchitect
 
       def detect_large_classes
         classes = []
-        app_path = File.join(project_path, 'app')
+        app_path = File.join(project_path, "app")
         return classes unless File.directory?(app_path)
 
-        Dir.glob(File.join(app_path, '**/*.rb')).each do |file|
+        Dir.glob(File.join(app_path, "**/*.rb")).each do |file|
           lines = File.readlines(file).count
-          classes << File.basename(file, '.rb') if lines > 150
+          classes << File.basename(file, ".rb") if lines > 150
         end
 
         classes
       end
 
-      def has_services?
-        services_path = File.join(project_path, 'app/services')
-        File.directory?(services_path) && !Dir.glob(File.join(services_path, '*.rb')).empty?
+      def services?
+        services_path = File.join(project_path, "app/services")
+        File.directory?(services_path) && !Dir.glob(File.join(services_path, "*.rb")).empty?
       end
 
       def detect_dependency_injection
-        app_path = File.join(project_path, 'app')
+        app_path = File.join(project_path, "app")
         return 0 unless File.directory?(app_path)
 
         count = 0
-        Dir.glob(File.join(app_path, '**/*.rb')).each do |file|
+        Dir.glob(File.join(app_path, "**/*.rb")).each do |file|
           content = File.read(file)
           # Look for initialize methods with parameters
           count += 1 if content.match?(/def initialize\([^)]+\)/)
@@ -213,13 +217,9 @@ module RailsArchitect
           suggestions << "Extract logic into service objects or concerns"
         end
 
-        unless has_concerns?
-          suggestions << "Consider creating app/concerns for shared behavior"
-        end
+        suggestions << "Consider creating app/concerns for shared behavior" unless concerns?
 
-        unless has_services?
-          suggestions << "Implement a service layer (app/services) for complex business logic"
-        end
+        suggestions << "Implement a service layer (app/services) for complex business logic" unless services?
 
         if analyze_inheritance_chains >= 3
           suggestions << "⚠️  Deep inheritance chains detected. Consider using composition or concerns"
@@ -230,9 +230,7 @@ module RailsArchitect
           suggestions << "Break them down using SRP (Single Responsibility Principle)"
         end
 
-        if detect_dependency_injection < 10
-          suggestions << "Use dependency injection to reduce tight coupling"
-        end
+        suggestions << "Use dependency injection to reduce tight coupling" if detect_dependency_injection < 10
 
         suggestions
       end
