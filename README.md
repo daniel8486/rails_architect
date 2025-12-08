@@ -16,7 +16,7 @@
 Adicione à seu Gemfile:
 
 ```ruby
-gem 'rails_architect'
+gem 'rails_architect_analyzer'
 ```
 
 Depois execute:
