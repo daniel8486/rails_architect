@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name          = "rails_architect"
   spec.version       = RailsArchitect::VERSION
   spec.authors       = ["Daniel Matos"]
-  spec.email         = ["eu@danieldjam.dev.br","danielmatos404@gmail.com"]
+  spec.email         = ["eu@danieldjam.dev.br", "danielmatos404@gmail.com"]
 
   spec.summary       = "Analyze Rails projects for architecture, TDD, BDD, and SOLID principles"
   spec.description   = "A gem that analyzes your Rails project structure and suggests improvements " \
