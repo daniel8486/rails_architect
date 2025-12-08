@@ -28,25 +28,25 @@ jobs:
     - name: Run RuboCop
       run: bundle exec rubocop --display-cop-names
 
-  build:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.3'
-        bundler-cache: true
-
-    - name: Build gem
-      run: bundle exec rake build
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: rails_architect-gem
-        path: pkg/
+  # build:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  # 
+  #   steps:
+  #   - uses: actions/checkout@v3
+  # 
+  #   - name: Set up Ruby
+  #     uses: ruby/setup-ruby@v1
+  #     with:
+  #       ruby-version: '3.3'
+  #       bundler-cache: true
+  # 
+  #   - name: Build gem
+  #     run: bundle exec rake build
+  # 
+  #   - name: Upload artifact
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: rails_architect_analyzer-gem
+  #       path: pkg/
