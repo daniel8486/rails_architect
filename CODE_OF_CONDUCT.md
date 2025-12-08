@@ -34,7 +34,7 @@ Este Código de Conduta se aplica tanto em espaços do projeto quanto em espaço
 
 ## Execução
 
-Instâncias de comportamento abusivo, de assédio ou inaceitável podem ser denunciadas entrando em contato com a equipe do projeto em seu-email@example.com. Todas as reclamações serão revisadas e investigadas e resultarão em uma resposta que se julge necessária e apropriada às circunstâncias. A equipe do projeto é obrigada a manter a confidencialidade em relação ao relator de um incidente.
+Instâncias de comportamento abusivo, de assédio ou inaceitável podem ser denunciadas entrando em contato com a equipe do projeto em eu@danieldjam.dev.br. Todas as reclamações serão revisadas e investigadas e resultarão em uma resposta que se julge necessária e apropriada às circunstâncias. A equipe do projeto é obrigada a manter a confidencialidade em relação ao relator de um incidente.
 
 ## Atribuição
 
