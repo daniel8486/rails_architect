@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+# This is an example Gemfile for a Rails project that uses rails_architect
+# Install rails_architect to analyze your project
+
+gem 'rails', '~> 7.0'
+gem 'rails_architect', path: '../rails_architect' # or gem 'rails_architect' from rubygems
+
+group :development do
+  gem 'rails_architect'
+end
