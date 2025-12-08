@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Analyze Rails projects for architecture, TDD, BDD, and SOLID principles"
   spec.description   = "A gem that analyzes your Rails project structure and suggests improvements " \
                        "based on architecture best practices, TDD, BDD, and SOLID principles."
-  spec.homepage      = "https://github.com/8486/rails_architect"
+  spec.homepage      = "https://github.com/daniel8486/rails_architect"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 3.3.0"
 
