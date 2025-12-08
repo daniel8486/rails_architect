@@ -5,6 +5,21 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 e este projeto segue [Semantic Versioning](https://semver.org/lang/pt_BR/).
 
+## [0.1.1] - 2025-12-08
+
+### Added
+- ✨ Cobertura completa de testes com 53 exemplos
+- ✨ Testes para todos os 4 analyzers (Architecture, TDD, BDD, SOLID)
+- ✨ Testes para CLI e ReportGenerator
+- ✨ Testes para Core module
+
+### Fixed
+- 🐛 Corrigidas violações RuboCop (whitespace, imports)
+- 🐛 Suprimido aviso de false positive do RSpec
+
+### Changed
+- 📝 Configuração de testes aprimorada com exclude_pattern
+
 ## [0.1.0] - 2025-12-08
 
 ### Added
