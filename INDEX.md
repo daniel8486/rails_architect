@@ -60,7 +60,7 @@
 
 ### Instalação
 ```bash
-gem 'rails_architect'
+gem 'rails_architect_analyzer'
 bundle install
 ```
 
@@ -173,7 +173,7 @@ Sim! A gem é compatível com Rails 6.0+.
 ## 🔗 Links Úteis
 
 - **GitHub**: https://github.com/daniel8486/rails_architect
-- **RubyGems**: https://rubygems.org/gems/rails_architect
+- **RubyGems**: https://rubygems.org/gems/rails_architect_analyzer
 - **Issues**: https://github.com/daniel8486/rails_architect/issues
 - **Discussions**: https://github.com/daniel8486/rails_architect/discussions
 
