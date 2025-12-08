@@ -19,7 +19,7 @@ RSpec.describe RailsArchitect::Reporters::ReportGenerator do
         spec_files: 5,
         coverage_percentage: 45.5,
         suggestions: ["Add more test coverage"],
-        test_structure: { 
+        test_structure: {
           models: { spec: 5, test: 0, total: 5 },
           controllers: { spec: 0, test: 0, total: 0 },
           services: { spec: 0, test: 0, total: 0 },
@@ -34,7 +34,7 @@ RSpec.describe RailsArchitect::Reporters::ReportGenerator do
         step_definitions_count: 0,
         score: { score: 0, rating: "❌ No BDD implemented", color: :red },
         suggestions: ["Consider adding Cucumber"],
-        practices: { 
+        practices: {
           user_stories: false,
           readable_scenarios: { present: false, count: 0 },
           step_reusability: 0,

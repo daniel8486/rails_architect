@@ -19,17 +19,17 @@ RSpec.describe RailsArchitect::CLI do
         cli.invoke(:analyze, [project_path, "--json", "--output", output_file])
         expect(File.exist?(output_file)).to be true if File.exist?(output_file)
       ensure
-        File.delete(output_file) if File.exist?(output_file)
+        FileUtils.rm_f(output_file)
       end
     end
 
     it "saves report to file when --output option is provided" do
       output_file = "/tmp/test_report_#{Time.now.to_i}.txt"
       begin
-        allow(STDOUT).to receive(:puts)
+        allow($stdout).to receive(:puts)
         cli.invoke(:analyze, [project_path, "--output", output_file])
       ensure
-        File.delete(output_file) if File.exist?(output_file)
+        FileUtils.rm_f(output_file)
       end
     end
   end
