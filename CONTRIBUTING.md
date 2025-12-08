@@ -46,7 +46,7 @@ A Rails Architect analisa automaticamente a estrutura do seu projeto Rails e for
 Adicione à seu `Gemfile`:
 
 ```ruby
-gem 'rails_architect'
+gem 'rails_architect_analyzer'
 ```
 
 Execute:
@@ -58,7 +58,7 @@ bundle install
 ### 2. Via Gem Manual
 
 ```bash
-gem install rails_architect
+gem install rails_architect_analyzer
 ```
 
 ## 📖 Uso
