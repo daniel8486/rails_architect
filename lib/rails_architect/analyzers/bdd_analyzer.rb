@@ -12,8 +12,8 @@ module RailsArchitect
 
       def analyze
         {
-          has_cucumber: has_cucumber?,
-          has_rspec: has_rspec?,
+          has_cucumber: cucumber?,
+          has_rspec: rspec?,
           feature_files_count: count_feature_files,
           step_definitions_count: count_step_definitions,
           score: calculate_bdd_score,
@@ -70,7 +70,7 @@ module RailsArchitect
 
       def check_bdd_practices
         {
-          user_stories: has_user_stories?,
+          user_stories: user_stories?,
           readable_scenarios: check_readable_scenarios,
           step_reusability: analyze_step_reusability,
           integration_tests: check_integration_tests
