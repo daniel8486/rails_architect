@@ -33,3 +33,5 @@ TESTING.md
 setup_and_test.sh
 QUICK_TEST_GUIDE.md
 SETUP_SUMMARY.md
+PUBLISH_INSTRUCTIONS.md
+publish_gem.sh
