@@ -151,7 +151,7 @@ rails_architect/
 ## ❓ Dúvidas Frequentes
 
 ### Como instalar?
-Veja [QUICKSTART.md](QUICKSTART.md) para instruções passo a passo.
+
 
 ### Como usar?
 ```bash
@@ -159,27 +159,27 @@ rails_architect analyze
 ```
 
 ### Como interpretar os scores?
-Veja a seção "Interpretando os Resultados" em [QUICKSTART.md](QUICKSTART.md).
+
 
 ### Posso usar em meu projeto Rails?
 Sim! A gem é compatível com Rails 6.0+.
 
 ### Como contribuir?
-Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
 
 ### Como publicar?
-Veja [PUBLISHING.md](PUBLISHING.md).
+
 
 ## 🔗 Links Úteis
 
-- **GitHub**: https://github.com/danielmatos-pro/rails_architect
+- **GitHub**: https://github.com/daniel8486/rails_architect
 - **RubyGems**: https://rubygems.org/gems/rails_architect
-- **Issues**: https://github.com/danielmatos-pro/rails_architect/issues
-- **Discussions**: https://github.com/danielmatos-pro/rails_architect/discussions
+- **Issues**: https://github.com/daniel8486/rails_architect/issues
+- **Discussions**: https://github.com/daniel8486/rails_architect/discussions
 
 ## 📞 Suporte
 
-- 📧 Email: seu-email@example.com
+- 📧 Email: eu@danieldjam.dev.br | danielmatos404@gmail.com
 - 🐛 Bugs: Abra uma issue no GitHub
 - 💬 Dúvidas: Inicie uma discussão no GitHub
 

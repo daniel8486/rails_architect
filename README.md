@@ -263,8 +263,8 @@ MIT License - veja LICENSE.md para detalhes
 
 ## Autor
 
-Daniel Matos - [@danielmatos-pro](https://github.com/danielmatos-pro)
+Daniel Matos - [@daniel8486](https://github.com/daniel8486)
 
 ## Suporte
 
-Para reportar bugs ou sugerir features, abra uma issue no [GitHub](https://github.com/danielmatos-pro/rails_architect/issues).
+Para reportar bugs ou sugerir features, abra uma issue no [GitHub](https://github.com/daniel8486/rails_architect/issues).

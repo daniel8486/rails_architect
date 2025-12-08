@@ -492,17 +492,17 @@ copies of the Software.
 
 ### Issues
 
-Para reportar bugs ou sugerir features, abra uma issue no [GitHub Issues](https://github.com/danielmatos-pro/rails_architect/issues).
+Para reportar bugs ou sugerir features, abra uma issue no [GitHub Issues](https://github.com/daniel8486/rails_architect/issues).
 
 ### Discussões
 
-Tenha dúvidas? Inicie uma discussão no [GitHub Discussions](https://github.com/danielmatos-pro/rails_architect/discussions).
+Tenha dúvidas? Inicie uma discussão no [GitHub Discussions](https://github.com/daniel8486/rails_architect/discussions).
 
 ## 👨‍💻 Autor
 
 **Daniel Matos**
-- GitHub: [@danielmatos-pro](https://github.com/danielmatos-pro)
-- Email: seu-email@example.com
+- GitHub: [@daniel8486](https://github.com/daniel8486)
+- Email: eu@danieldjam.dev.br | danielmatos404@gmail.com
 
 ## 🙏 Agradecimentos
 
@@ -526,9 +526,9 @@ Tenha dúvidas? Inicie uma discussão no [GitHub Discussions](https://github.com
 </p>
 
 <p align="center">
-  <a href="https://github.com/danielmatos-pro/rails_architect">⭐ Star no GitHub</a>
+  <a href="https://github.com/daniel8486/rails_architect">⭐ Star no GitHub</a>
   •
-  <a href="https://github.com/danielmatos-pro/rails_architect/issues">🐛 Reportar Bug</a>
+  <a href="https://github.com/daniel8486/rails_architect/issues">🐛 Reportar Bug</a>
   •
-  <a href="https://github.com/danielmatos-pro/rails_architect/issues">💡 Sugerir Feature</a>
+  <a href="https://github.com/daniel8486/rails_architect/issues">💡 Sugerir Feature</a>
 </p>
