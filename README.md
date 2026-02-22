@@ -1,15 +1,15 @@
 # Rails Architect
 
-🏗️ Uma gem Ruby para análise completa de projetos Rails com foco em arquitetura, TDD, BDD e princípios SOLID.
+Uma gem Ruby para análise completa de projetos Rails com foco em arquitetura, TDD, BDD e princípios SOLID.
 
 ## Características
 
-- **📐 Análise de Arquitetura**: Verifica a estrutura padrão do Rails e recomenda padrões opcionais
-- **🧪 Análise TDD**: Avalia cobertura de testes e sugere melhorias
-- **🎯 Análise BDD**: Identifica funcionalidades BDD com Cucumber e RSpec
-- **⚡ Análise SOLID**: Avalia cada princípio SOLID do seu código
-- **💡 Sugestões Inteligentes**: Recomendações específicas para seu projeto
-- **📊 Relatórios Detalhados**: Saída colorida e JSON exportável
+- ** Análise de Arquitetura**: Verifica a estrutura padrão do Rails e recomenda padrões opcionais
+- ** Análise TDD**: Avalia cobertura de testes e sugere melhorias
+- ** Análise BDD**: Identifica funcionalidades BDD com Cucumber e RSpec
+- ** Análise SOLID**: Avalia cada princípio SOLID do seu código
+- ** Sugestões Inteligentes**: Recomendações específicas para seu projeto
+- ** Relatórios Detalhados**: Saída colorida e JSON exportável
 
 ## Instalação
 
