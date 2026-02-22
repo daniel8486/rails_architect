@@ -123,12 +123,12 @@ Overall Score: 65%
   ✅ app/views (45 files)
   ...
 
-💡 Suggestions:
+Suggestions:
   • Consider creating 'app/services' directory for business logic
   • Create 'app/decorators' for separating presentation logic from models
   ...
 
-🧪 TEST-DRIVEN DEVELOPMENT (TDD) ANALYSIS
+TEST-DRIVEN DEVELOPMENT (TDD) ANALYSIS
 ────────────────────────────────────────────────────────────────────────────────
 Coverage Score: 45.5% ⚠️  Fair
 
