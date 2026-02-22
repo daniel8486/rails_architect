@@ -77,21 +77,21 @@ results[:solid][:score][:score]     # Score SOLID (0-100)
 
 ## O que é Analisado?
 
-### 📐 Arquitetura Rails
+###  Arquitetura Rails
 
 - Estrutura padrão de diretórios
 - Padrões opcionais (Services, Decorators, Policies, Presenters, Interactors, etc.)
 - Detecção de "fat models" e "fat controllers"
 - Qualidade de organização de helpers
 
-### 🧪 Test-Driven Development (TDD)
+###  Test-Driven Development (TDD)
 
 - Cobertura de testes (modelo de estimativa)
 - Número de testes por tipo (models, controllers, services, etc.)
 - Uso de RSpec vs Minitest
 - Sugestões para melhorar cobertura
 
-### 🎯 Behavior-Driven Development (BDD)
+###  Behavior-Driven Development (BDD)
 
 - Presença de Cucumber
 - Número de feature files e step definitions
