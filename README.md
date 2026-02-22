@@ -98,7 +98,7 @@ results[:solid][:score][:score]     # Score SOLID (0-100)
 - Análise de cenários legíveis (Given/When/Then)
 - Testes de integração (request specs)
 
-### ⚡ Princípios SOLID
+### Princípios SOLID
 
 1. **Single Responsibility**: Detecta classes com múltiplas responsabilidades
 2. **Open/Closed**: Verifica uso de concerns e herança
@@ -110,10 +110,10 @@ results[:solid][:score][:score]     # Score SOLID (0-100)
 
 ```
 ================================================================================
-🏗️  RAILS ARCHITECT - PROJECT ANALYSIS REPORT
+RAILS ARCHITECT - PROJECT ANALYSIS REPORT
 ================================================================================
 
-📐 ARCHITECTURE ANALYSIS
+ARCHITECTURE ANALYSIS
 ────────────────────────────────────────────────────────────────────────────────
 Overall Score: 65%
 
